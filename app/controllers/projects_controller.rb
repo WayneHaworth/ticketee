@@ -3,8 +3,8 @@ class ProjectsController < ApplicationController
     end
 
     def new
-        @project = Project.new(project_params)
-        @project.save
+        @project = Project.new
+
     end
 
     def create
