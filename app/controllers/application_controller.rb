@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
             redirect_to signin_url
         end
     end
+
     helper_method :require_signin!
 
     def current_user
@@ -18,5 +19,14 @@ class ApplicationController < ActionController::Base
     end
     helper_method :current_user
 
+  private
+      def authorize_admin!
+          require_signin!
+
+          unless current_user.admin?
+              flash[:alert] = "You must be an admin to do that."
+              redirect_to root_path
+          end
+      end
 
 end
