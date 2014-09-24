@@ -1,24 +1,2 @@
-<%= form_for [:admin, @user] do |f| %>
-    <% if @user.errors.any? %>
-        <div id="error_explanation">
-            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this
-            user from being saved:</h2>
-            <ul>
-                <% @user.errors_full_messages.each do |msg| %>
-                    <li><%= msg %></li>
-
-                <% end %>
-            </ul>
-        </div>
-    <% end %>
-    <p>
-        <%= f.label :email %>
-        <%= f.text_field :email %>
-    </p>
-
-    <p>
-        <%= f.label :password %>
-        <%= f.password_field :password %>
-    </p>
-    <%= f.submit %>
-<% end %>
+<h2>New User</h2>
+<%= render "form" %>
