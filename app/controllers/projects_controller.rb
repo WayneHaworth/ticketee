@@ -54,8 +54,14 @@ class ProjectsController < ApplicationController
 
     private
         def set_project
-            @project = Project.viewable_by(current_user).find(params[:id])
-        rescue ActiveRecord::RecordNotFound
+
+            @project = if current_user.admin?
+                Project.find(params[:id])
+            else
+                Project.viewable_by(current_user).find(params[:id])
+            end
+
+            rescue ActiveRecord::RecordNotFound
             flash[:alert] = "The project you were looking for could not be found."
 
             redirect_to projects_path
